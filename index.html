@@ -3,11 +3,47 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>Colorful Code</title>
-		<link href="style.css" rel="stylesheet" media="screen">
+		<style type="text/css">
+			section#formforcolor{
+				float: left;
+				width: 50%;
+			}
+			section#codecolored{
+				float: right;
+				width: 50%;
+			}
+		</style>
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js" charset="utf-8"></script>
+		<script type="text/javascript" src="http://malsup.github.com/jquery.form.js" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function(){
+					$("#sendcode").submit(function(event){
+						event.preventDefault();
+						var $form=$(this);
+						code = $form.find('textarea[name="code"]').val();
+						langtype = $form.find('select[name="lang"]').val();
+						style = $form.find('select[name="style"]').val();
+						url = $form.attr('action');
+						$.post(url, {code: code,lang: langtype,style: style},function(data){
+							$("section#codecolored").empty();
+							$("section#codecolored").append(data);
+							});
+						});
+					$("#uploadcode").ajaxForm({
+						beforeSubmit: function(){},
+						success: function(data){
+							$("section#codecolored").empty();
+							$("section#codecolored").append(data);
+						}
+					});
+					
+			})
+		</script>
 	</head>
 	<body>
-		<form action="#" method="post" accept-charset="utf-8">
-			<textarea rows="30" cols="50" name="code"></textarea><br />
+	<section id="formforcolor">
+		<form id="sendcode" action="#" method="post" accept-charset="utf-8">
+			<textarea rows="35" cols="55" name="code"></textarea><br />
 			<select name="lang">
 				%for lang in langtypes:
 					<option value="{{lang}}">{{lang}}</option>
@@ -18,7 +54,25 @@
 					<option value="{{style}}">{{style}}</option>
 				%end
 			</select>
-			<input id="codesubmit" type="submit" value="提交"/ >
+			<input id="codesubmit" type="submit" value="提交" />
 		</form>
+		或者上传代码：<br />
+		<form id="uploadcode" enctype="multipart/form-data" action="#" method="post">
+			<input id="uploadcodefile" type="file" name="codefile" />
+			<select name="lang">
+				%for lang in langtypes:
+					<option value="{{lang}}">{{lang}}</option>
+				%end
+			</select>
+			<select name="style">
+				%for style in styles:
+					<option value="{{style}}">{{style}}</option>
+				%end
+			</select>
+			<input id="codeupload" type="submit" value="上传" />
+		</form>
+	</section>
+	<section id="codecolored">
+	</section>
 	</bdoy>
 </html>

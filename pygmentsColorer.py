@@ -42,4 +42,4 @@ def output_end():
     return '</body>'+'</html>'
 
 def colorCode(code, lang, style):
-	return output_head()+code2html(code,lang,style)+output_end()
+	return code2html(code,lang,style)
