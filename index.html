@@ -13,6 +13,11 @@
 					<option value="{{lang}}">{{lang}}</option>
 				%end
 			</select>
+			<select name="style">
+				%for style in styles:
+					<option value="{{style}}">{{style}}</option>
+				%end
+			</select>
 			<input id="codesubmit" type="submit" value="提交"/ >
 		</form>
 	</bdoy>
