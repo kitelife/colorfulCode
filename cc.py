@@ -2,6 +2,7 @@ import os
 from bottle import get,post,request,route,template,static_file,run
 import pygmentsColorer
 import fileoperation
+import compileandrun
 
 langlist = pygmentsColorer.getLexers()
 stylelist = pygmentsColorer.getStyles()
@@ -43,12 +44,11 @@ def postindex():
 def compileSourceCode():
 	sourcecode=request.forms.get('sourcecode')
 	langtype = request.forms.get('langtype')
-	print sourcecode, langtype
-	return 'OK!'
+	return compileandrun.compilerunCode(sourcecode, langtype)
 
 @get('/static/:filename')
 def server_static(filename):
 	path=os.getcwd()+'/static'
 	return static_file(filename,root=os.getcwd()+'/static')
 
-run(host='192.168.1.32', port=8080)
+run(host='127.0.0.1', port=8888)
