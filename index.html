@@ -3,76 +3,59 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>Colorful Code</title>
-		<style type="text/css">
-			section#formforcolor{
-				float: left;
-				width: 50%;
-			}
-			section#codecolored{
-				float: right;
-				width: 50%;
-			}
-		</style>
-		<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js" charset="utf-8"></script>
+		<link type="text/css" rel="stylesheet" href="/static/style.css" />
+		<link type="text/css" rel="stylesheet" href="/static/jquery-ui-1.8.18.custom.css">
+		<script type="text/javascript" src="/static/jquery-1.7.1.min.js" charset="utf-8"></script>
+		<script type="text/javascript" src="/static/jquery-ui-1.8.18.custom.min.js"></script>
 		<script type="text/javascript" src="http://malsup.github.com/jquery.form.js" charset="utf-8"></script>
-		<script type="text/javascript">
-			$(function(){
-					$("#sendcode").submit(function(event){
-						event.preventDefault();
-						var $form=$(this);
-						code = $form.find('textarea[name="code"]').val();
-						langtype = $form.find('select[name="lang"]').val();
-						style = $form.find('select[name="style"]').val();
-						url = $form.attr('action');
-						$.post(url, {code: code,lang: langtype,style: style},function(data){
-							$("section#codecolored").empty();
-							$("section#codecolored").append(data);
-							});
-						});
-					$("#uploadcode").ajaxForm({
-						beforeSubmit: function(){},
-						success: function(data){
-							$("section#codecolored").empty();
-							$("section#codecolored").append(data);
-						}
-					});
-					
-			})
-		</script>
+		<script type="text/javascript" src="/static/main.js" charset="utf-8"></script>
 	</head>
 	<body>
-	<section id="formforcolor">
-		<form id="sendcode" action="#" method="post" accept-charset="utf-8">
-			<textarea rows="35" cols="55" name="code"></textarea><br />
-			<select name="lang">
-				%for lang in langtypes:
-					<option value="{{lang}}">{{lang}}</option>
-				%end
-			</select>
-			<select name="style">
-				%for style in styles:
-					<option value="{{style}}">{{style}}</option>
-				%end
-			</select>
-			<input id="codesubmit" type="submit" value="提交" />
-		</form>
-		或者上传代码：<br />
-		<form id="uploadcode" enctype="multipart/form-data" action="#" method="post">
-			<input id="uploadcodefile" type="file" name="codefile" />
-			<select name="lang">
-				%for lang in langtypes:
-					<option value="{{lang}}">{{lang}}</option>
-				%end
-			</select>
-			<select name="style">
-				%for style in styles:
-					<option value="{{style}}">{{style}}</option>
-				%end
-			</select>
-			<input id="codeupload" type="submit" value="上传" />
-		</form>
-	</section>
-	<section id="codecolored">
-	</section>
-	</bdoy>
+		<h1>代码之美</h1>
+		<div class="colorfulcode">
+			<div id="tabs">
+			<ul>
+				<li id=highlight><a href="#tabs-1">高亮</a></li>
+				<li id=share><a href="#tabs-2">分享</a></li>
+				<li id=onlinecompile><a href="#tabs-3">在线编译</a></li>
+			</ul>
+			<div id="tabs-1">
+				<div id="formforcolor">
+				<p>
+				<form id="codetocolor" enctype="multipart/form-data" action="#" method="post">
+					<textarea id="pastecode" rows="19" cols="50" name="code"></textarea><br />
+					或者上传代码:<br />
+					<input id="uploadcodefile" type="file" name="codefile" /><br /><br />
+					语言:<select name="lang">
+					%for lang in langtypes:
+						<option value="{{lang}}">{{lang}}</option>
+					%end
+					</select>
+					风格:<select name="style">
+					%for style in styles:
+						<option value="{{style}}">{{style}}</option>
+					%end
+					</select>
+					保存？<input id="saveornot" type="checkbox" name="save">
+					<input id="codeupload" type="submit" value="提交" />
+				</form>
+				</p>
+			</div>
+				<div id="codecolored">
+				</div>
+			</div>
+			<div id="tabs-2">
+				<div id="codefilelist">
+					<p>
+					</p>
+				</div>
+				<div id="codefilecontent">
+				</div>
+			</div>
+			<div id="tabs-3">
+			<p>tabs-3</p>
+			</div>
+		</div>
+	</div>
+	</body>
 </html>

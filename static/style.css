@@ -1,0 +1,16 @@
+#formforcolor{
+	float: left;
+	width: 45%;
+}
+#codecolored{
+	float: right;
+	width: 55%;
+}
+#codefilelist{
+	float: left;
+	width: 25%;
+}
+#codefilecontent{
+	float: right;
+	width: 75%;
+}
