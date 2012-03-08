@@ -28,4 +28,15 @@ $(function(){
 			$("div#codefilecontent").empty().append(filename).append(data);
 			});
 		});
+	$("#compilecode").submit(function(){
+			event.preventDefault();
+			var $form = $(this);
+			sourcecode=$form.find('textarea[name="code2compile"]').val(),
+			langtype = $form.find('select[name="selectLangtype"]').val(),
+			url=$form.attr('action');
+			$.post(url,{sourcecode: sourcecode, langtype:langtype}, function(result){
+				$('div#resultOfcompile>p').empty();
+				$('div#resultOfcompile>p').append(result);
+				});
+			});
 })

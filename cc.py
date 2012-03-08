@@ -10,8 +10,8 @@ stylelist = pygmentsColorer.getStyles()
 def getindex():
 	return template('index', langtypes=langlist,styles=stylelist);
 
-@get('/:filelist.json')
-def getfilelist(filelist):
+@get('/filelist.json')
+def getfilelist():
 	codefilelist = fileoperation.getFilelist()
 	codefilelist.sort()
 	codelistJson={}
@@ -20,8 +20,8 @@ def getfilelist(filelist):
 		codelistJson[index]=codefile
 		index += 1
 	return codelistJson
-@post('/:getfilecontent')
-def getFilecontent(getfilecontent):
+@post('/getfilecontent')
+def getFilecontent():
 	return pygmentsColorer.getColorfilecontent(request.forms.get('codefilename'))
 
 @post('/')
@@ -38,6 +38,13 @@ def postindex():
 	else:
 		code=request.forms.get('code')
 	return pygmentsColorer.getColorCode(code, lang, style)
+
+@post('/compilesourcecode')
+def compileSourceCode():
+	sourcecode=request.forms.get('sourcecode')
+	langtype = request.forms.get('langtype')
+	print sourcecode, langtype
+	return 'OK!'
 
 @get('/static/:filename')
 def server_static(filename):

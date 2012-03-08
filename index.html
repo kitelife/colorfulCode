@@ -41,7 +41,7 @@
 				</form>
 				</p>
 			</div>
-				<div id="codecolored">
+				<div id="codecolored"> 
 				</div>
 			</div>
 			<div id="tabs-2">
@@ -53,7 +53,25 @@
 				</div>
 			</div>
 			<div id="tabs-3">
-			<p>tabs-3</p>
+				<div id="sourcecode">
+					Paste source code to compile
+					<p>
+					<form id="compilecode" action="/compilesourcecode" method="post"> 
+						<textarea id="sourcecodehere" rows="20" cols="50" name="code2compile"></textarea><br />
+						<select id="selectlangtype" name="selectLangtype">
+							<option value="c">c</option>
+							<option value="c++">c++</option>
+							<option value="java">java</option>
+							<option value="python">python</option>
+						</select>
+						<input type="submit" value="(编译)运行">
+					</form>
+					</p>
+				</div>
+				<div id="resultOfcompile">
+					<p>
+					</p>
+				</div>
 			</div>
 		</div>
 	</div>

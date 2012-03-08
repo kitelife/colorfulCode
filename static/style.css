@@ -1,8 +1,8 @@
-#formforcolor{
+#formforcolor,#sourcecode{
 	float: left;
 	width: 45%;
 }
-#codecolored{
+#codecolored,#resultOfcompile{
 	float: right;
 	width: 55%;
 }
