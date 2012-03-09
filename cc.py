@@ -51,4 +51,4 @@ def server_static(filename):
 	path=os.getcwd()+'/static'
 	return static_file(filename,root=os.getcwd()+'/static')
 
-run(host='192.168.1.32', port=8888)
+run(host='192.168.1.32', port=8080)

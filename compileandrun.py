@@ -4,8 +4,10 @@ import time
 
 cwd = os.getcwd() + '/compileenv/'
 
-def subprocessPopen(cmd,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,cwd=cwd,shell=True):
-	return subprocess.Popen(cmd,stdin=stdin,stdout=stdout,stderr=stderr,cwd=cwd,shell=shell)
+def subprocessPopen(cmd,stdin=subprocess.PIPE,stdout=subprocess.PIPE,\
+		stderr=subprocess.PIPE,cwd=cwd,shell=True):
+	return subprocess.Popen(cmd,stdin=stdin,stdout=stdout,\
+			stderr=stderr,cwd=cwd,shell=shell)
 
 def scriptrun(cmd, filename):
 	p = subprocessPopen(cmd)
