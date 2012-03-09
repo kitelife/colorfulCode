@@ -18,12 +18,9 @@ def compilerun(compilecmd, runcmd, filename):
 	compileresult=p.stdout.read()+p.stderr.read()
 	p = subprocessPopen(runcmd)
 	runresult = p.stdout.read()+p.stderr.read()
-	result='<b>Compile Output:</b><br />'+compileresult+'<br /><b>Run Output:</b><br />' + runresult
-	runfilename = cwd + filename
-	if os.path.isfile(runfilename):
-		os.remove(cwd+filename)
-	os.remove(runfilename+'.c')
-	return result.replace('\n','<br />')
+	return ('<b>Compile Output:</b><br />'+compileresult+\
+			'<br /><b>Run Output:</b><br />' + runresult).\
+			replace('\n','<br />')
 
 def compilerunCode(sourcecode, lang):
 	if not os.path.isdir(cwd):
@@ -33,10 +30,28 @@ def compilerunCode(sourcecode, lang):
 		open(filename, 'w').write(sourcecode)
 		cmd = 'python %s' % filename
 		return scriptrun(cmd, filename)
-	elif lang == 'c':
+	else:
 		filenamenosubfix = (str)(time.time())
-		sourcefilename = cwd + filenamenosubfix+'.c'
-		open(sourcefilename, 'w').write(sourcecode)
-		compilecmd = 'gcc -Wall %s -o %s'%(sourcefilename, filenamenosubfix)
-		runcmd = './%s'%filenamenosubfix
-		return compilerun(compilecmd, runcmd, filenamenosubfix)
+		if lang == 'c':
+			sourcefilename = cwd + filenamenosubfix+'.c'
+			open(sourcefilename, 'w').write(sourcecode)
+			compilecmd = 'gcc -Wall %s -o %s'%(sourcefilename, filenamenosubfix)
+			runcmd = './%s'%filenamenosubfix
+			result = compilerun(compilecmd, runcmd, filenamenosubfix)
+			runfilename = cwd + filenamenosubfix
+			if os.path.isfile(runfilename):
+				os.remove(runfilename)
+			os.remove(sourcefilename)
+			return result
+
+		elif lang == 'c++':
+			sourcefilename = cwd + filenamenosubfix + '.cpp'
+			open(sourcefilename, 'w').write(sourcecode)
+			compilecmd = "g++ -Wall %s -o %s"%(sourcefilename, filenamenosubfix)
+			runcmd = './%s'%filenamenosubfix
+			result =  compilerun(compilecmd, runcmd, filenamenosubfix)
+			runfilename = cwd + filenamenosubfix
+			if os.path.isfile(runfilename):
+				os.remove(runfilename)
+			os.remove(sourcefilename)
+			return result
