@@ -13,16 +13,17 @@ $(function(){
 	$("#tabs").tabs();
 	$("li#share>a").click(function(event){
 		$.getJSON('/filelist.json', function(jsondata){
-			$("div#codefilelist>p").empty();
+			$("div#codefilelist").empty();
 			var dataAppended="<br /><ul>";
 			for(var key in jsondata){
 				var val = jsondata[key];
-				dataAppended += '<li>'+val+'</li><br />';
+				dataAppended += '<li><a href=":;">'+val+'</a></li><br />';
 			}
-			$("div#codefilelist>p").append(dataAppended+'</ul>');
+			$("div#codefilelist").append(dataAppended+'</ul>');
 		});
 	});
-	$("div#codefilelist>p>ul>li").live('click',function(event){
+	$("div#codefilelist>ul>li>a").live('click',function(event){
+		event.preventDefault();
 		var filename = $(this)[0].innerText;
 		$.post("/getfilecontent",{codefilename: filename}, function(data){
 			$("div#codefilecontent").empty().append(filename).append(data);
