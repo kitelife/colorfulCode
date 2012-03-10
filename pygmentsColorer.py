@@ -14,7 +14,7 @@ def getStyles():
 	stylelist.sort()
 	return stylelist
 
-def colorCode(code, lexer, style='default'):
+def _colorCode(code, lexer, style='default'):
 	formatter = HtmlFormatter(
 			linenos=True,
 			encoding='utf-8',
@@ -33,10 +33,10 @@ def colorCode(code, lexer, style='default'):
 
 def getColorCode(code, lang, style):
 	lexer = get_lexer_by_name(lang, encoding='utf-8', stripall=True)
-	return colorCode(code,lexer,style)
+	return _colorCode(code,lexer,style)
 
 def getColorfilecontent(filename):
 	code = fileoperation.getFilecontent(filename)
 	lexer = get_lexer_for_filename(filename)
-	return colorCode(code, lexer)
+	return _colorCode(code, lexer)
 

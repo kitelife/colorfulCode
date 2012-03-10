@@ -1,10 +1,10 @@
 import os
 import glob
 
-currentDir = os.getcwd()
+_currentDir = os.getcwd()
 
 def saveFile(filename, content):
-	targetDir = currentDir + "/codefiles/"
+	targetDir = _currentDir + "/codefiles/"
 	if not os.path.isdir(targetDir):
 		os.mkdir(targetDir)
 	absolute = targetDir + filename
@@ -12,8 +12,8 @@ def saveFile(filename, content):
 	tf.write(content)
 
 def getFilelist():
-	filelist = glob.glob(currentDir+'/codefiles/*')
+	filelist = glob.glob(_currentDir+'/codefiles/*')
 	return [filename.split('/')[-1] for filename in filelist]
 
 def getFilecontent(filename):
-	return open(currentDir+'/codefiles/'+filename).read()
+	return open(_currentDir+'/codefiles/'+filename).read()
