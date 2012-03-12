@@ -46,7 +46,7 @@ def compileSourceCode():
 	langtype = request.forms.get('langtype')
 	return compileandrun.compilerunCode(sourcecode, langtype)
 
-@get('/static/:filename')
+@get('/static/<filename>')
 def server_static(filename):
 	path=os.getcwd()+'/static'
 	return static_file(filename,root=os.getcwd()+'/static')

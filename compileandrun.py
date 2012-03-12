@@ -32,6 +32,11 @@ def compilerunCode(sourcecode, lang):
 		open(filename, 'w').write(sourcecode)
 		cmd = 'python %s' % filename
 		return _scriptrun(cmd, filename)
+	elif lang == 'ruby':
+		filename = _cwd+(str)(time.time())+'.rb'
+		open(filename, 'w').write(sourcecode)
+		cmd = 'ruby %s' % filename
+		return _scriptrun(cmd, filename)
 	else:
 		filenamenosubfix = (str)(time.time())
 		if lang == 'c':
