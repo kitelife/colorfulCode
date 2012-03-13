@@ -23,7 +23,7 @@
 				<div id="formforcolor">
 				<p>
 				<form id="codetocolor" enctype="multipart/form-data" action="#" method="post">
-					<textarea id="pastecode" rows="19" cols="50" name="code"></textarea><br />
+					<textarea id="pastecode" rows="10" cols="50" name="code"></textarea><br />
 					或者上传代码:<br />
 					<input id="uploadcodefile" type="file" name="codefile" /><br /><br />
 					语言:<select name="lang">
@@ -40,6 +40,8 @@
 					<input id="codeupload" type="submit" value="提交" />
 				</form>
 				</p>
+				HTML代码:<br />
+				<textarea id="resulthtmlcode" rows="10" cols="50"></textarea><br />
 			</div>
 				<div id="codecolored"> 
 				</div>

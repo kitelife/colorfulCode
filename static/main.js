@@ -4,6 +4,7 @@ $(function(){
 		success: function(data){
 			$("div#codecolored").empty();
 			$("div#codecolored").append(data);
+			$("textarea#resulthtmlcode").val(data);
 			$("#pastecode").val("");
 			var file = $("#uploadcodefile");
 			file.after(file.clone().val(""));
