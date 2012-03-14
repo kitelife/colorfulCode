@@ -11,6 +11,7 @@ def _subprocessPopen(cmd,stdin=subprocess.PIPE,stdout=subprocess.PIPE,\
 
 def _scriptrun(cmd, filename):
 	p = _subprocessPopen(cmd)
+	p.stdin.write(" \n")
 	result =  p.stdout.read()+p.stderr.read()
 	os.remove(filename)
 	return result.replace('\n','<br />')
