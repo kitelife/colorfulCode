@@ -7,7 +7,7 @@ _cwd = os.getcwd() + '/compileenv/'
 def _subprocessPopen(cmd,stdin=subprocess.PIPE,stdout=subprocess.PIPE,\
 		stderr=subprocess.PIPE,cwd=_cwd,shell=True):
 	return subprocess.Popen(cmd,stdin=stdin,stdout=stdout,\
-			stderr=stderr,cwd=_cwd,shell=shell)
+			stderr=stderr,cwd=cwd,shell=shell)
 
 def _scriptrun(cmd, filename):
 	p = _subprocessPopen(cmd)
@@ -27,37 +27,43 @@ def _compilerun(compilecmd, runcmd, filename):
 def compilerunCode(sourcecode, lang):
 	if not os.path.isdir(_cwd):
 		os.mkdir(_cwd)
+	os.chdir(_cwd)
+
 	if lang == 'python':
-		filename = _cwd+(str)(time.time())+'.py'
+		filename = (str)(time.time())+'.py'
 		open(filename, 'w').write(sourcecode)
 		cmd = 'python %s' % filename
 		return _scriptrun(cmd, filename)
 	elif lang == 'ruby':
-		filename = _cwd+(str)(time.time())+'.rb'
+		filename = (str)(time.time())+'.rb'
 		open(filename, 'w').write(sourcecode)
 		cmd = 'ruby %s' % filename
 		return _scriptrun(cmd, filename)
 	else:
 		filenamenosubfix = (str)(time.time())
 		if lang == 'c':
-			sourcefilename = _cwd + filenamenosubfix+'.c'
+			sourcefilename = filenamenosubfix+'.c'
 			open(sourcefilename, 'w').write(sourcecode)
 			compilecmd = 'gcc -Wall %s -o %s'%(sourcefilename, filenamenosubfix)
+			#runcmd = './%s'%filenamenosubfix
 			runcmd = './%s'%filenamenosubfix
 			result = _compilerun(compilecmd, runcmd, filenamenosubfix)
-			runfilename = _cwd + filenamenosubfix
+			#runfilename = _cwd + filenamenosubfix
+			runfilename = filenamenosubfix
 			if os.path.isfile(runfilename):
 				os.remove(runfilename)
 			os.remove(sourcefilename)
 			return result
 
 		elif lang == 'c++':
-			sourcefilename = _cwd + filenamenosubfix + '.cpp'
+			sourcefilename = filenamenosubfix + '.cpp'
 			open(sourcefilename, 'w').write(sourcecode)
 			compilecmd = "g++ -Wall %s -o %s"%(sourcefilename, filenamenosubfix)
-			runcmd = './%s'%filenamenosubfix
+			#runcmd = './%s'%filenamenosubfix
+			runcmd = './%s'%(filenamenosubfix)
 			result =  _compilerun(compilecmd, runcmd, filenamenosubfix)
-			runfilename = _cwd + filenamenosubfix
+			#runfilename = _cwd + filenamenosubfix
+			runfilename = filenamenosubfix
 			if os.path.isfile(runfilename):
 				os.remove(runfilename)
 			os.remove(sourcefilename)

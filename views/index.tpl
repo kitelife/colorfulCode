@@ -57,7 +57,7 @@
 					输入程序：
 					<p>
 					<form id="compilecode" action="/compilesourcecode" method="post"> 
-						<textarea id="sourcecodehere" rows="20" cols="50" name="code2compile"></textarea><br />
+						<textarea id="sourcecodehere" rows="20" cols="45" name="code2compile"></textarea><br />
 						<select id="selectlangtype" name="selectLangtype">
 							<option value="c">c</option>
 							<option value="c++">c++</option>
