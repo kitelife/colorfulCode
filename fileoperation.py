@@ -12,6 +12,7 @@ def saveFile(filename, content):
 	tf.write(content)
 
 def getFilelist():
+	# get the file list under folder codefiles
 	filelist = glob.glob(_currentDir+'/codefiles/*')
 	return [filename.split('/')[-1] for filename in filelist]
 
