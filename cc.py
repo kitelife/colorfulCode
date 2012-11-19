@@ -1,5 +1,5 @@
 import os
-from bottle import get,post,request,route,template,static_file,run
+from bottle import get,post,request,template,static_file,run
 import pygmentsColorer
 import fileoperation
 import compileandrun
@@ -48,7 +48,6 @@ def compileSourceCode():
 
 @get('/static/<filename>')
 def server_static(filename):
-	path=os.getcwd()+'/static'
 	return static_file(filename,root=os.getcwd()+'/static')
 
 # debug=True
